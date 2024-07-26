@@ -1,0 +1,19 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    /* background-color: red; */
+}
+.search-bar{
+    /* color: white; */
+    background-color: transparent;
+    /* border:none; */
+    align-content: center;
+    width: 75%;
+}
+
+
+.search-bar:focus{
+    outline:none;
+}

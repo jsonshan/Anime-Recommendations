@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+
+.navbar {
+
+    height: 3.75rem;
+    width: 100%;
+    background-color: #23252B;
+    display: flex;
+    align-items: center;
+    /* align-items: stretch; */
+}
+
+.navbar > .logo {
+    height: 1.75rem;
+    padding: 0 1.125rem;
+    margin-left: 50px;
+}
+
+.icon {
+    height: 2.25rem;
+    padding: 0 15px;
+}
+.icon-wrapper{
+    align-content: center;
+}
+.icon-wrapper:hover{ 
+    background-color: #141519;
+    height: 100%;
+}
+.search {
+    /* width: 27px;
+    height: 27px; */
+    height: 1.72rem;
+}
+
+.invert {
+    filter: invert(100%);
+}
+
+.navbar_menu{
+    display: flex;
+    margin: 0;
+    height: 100%;
+    width: calc(65vw - 20px);
+    max-width: 84.375rem;
+}
+.bookmark{
+    height: 1.72em;
+}
+.user {
+    height: 1.72em;
+}
+/* .navbar > *:nth-child(5){
+    margin-right: 10em;
+} */
+
+/* .left-side {
+    flex: 1.5;
+}
+
+.right-side{
+    flex: 0.5;
+} */
+
+
+h3{
+    margin: 0;
+    color: #dadada;
+    font-size: 16px;
+    font-family: 'Lato';
+    /* height: 100%; */
+    font-weight: 400;
+    padding: 0 16px;
+    height: 100%;
+    align-content: center;
+}
+h3:hover {
+    background-color: #141519;
+    color: #fff;
+
+}
+
