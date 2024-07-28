@@ -77,4 +77,10 @@ button{
     border: none;
     cursor: pointer;
 }
-
+.show {
+    display: block;
+}
+.hide {
+    opacity: 0;
+    cursor: text;
+}
