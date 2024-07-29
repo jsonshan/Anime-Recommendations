@@ -20,6 +20,11 @@ function Search() {
   };
   const handleInputText = (event) => {
     // event.target.value == '' ? setHasResult(false) ? setHasResult(true);
+    if (event.target.value != 'no-result'){ // CHECK WHETHER THERE ARE RESULTS OR NOT
+      setHasResult(true);
+    } else {
+      setHasResult(false);
+    }
     setInputText(event.target.value);
   }
 
@@ -44,14 +49,26 @@ function Search() {
           ?
             (hasResult
               ? 
-                <div>
-                  RESULTS
+                <div className="black-wrapper">
+                  <div className="result-content-wrapper">
+                    <h4>Top Results:</h4>
+                    <div>
+                      <img src="https://dummyimage.com/100x150/dadada/fff"/>
+
+                    </div>
+                  </div>
                 </div>
               :
-                <></>
+                <div className="content-wrapper">
+                  <div className="empty-search-results">
+                    <img className="mascot" src={CrunchyMascot}/>
+                    <p>Sorry, no results were found. Check your spelling or try searching for something else.</p>
+                  </div>
+
+                </div>
             )
           : 
-            <></>
+            <div className="empty"></div>
         }
     </>
     
