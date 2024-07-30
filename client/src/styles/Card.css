@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+.card{
+    margin-bottom: 20px;
+    /* text-align: center; */
+    font-family: "Lato";
+    width: 190px;
+    font-weight: 525;
+    height: 322px;
+}
+.item{
+    height: 280px;
+    width: 190px;
+}
+
+
+.hovered-card{
+    padding: 15px 10px 0 10px;
+    font-size: 13px;
+    background-color: #141519;
+    height: 322px;
+    /* transition: background-color .3s ease, transform .3s ease; */
+
+}
+
+.anime-title{
+    padding-bottom: 10px;
+}
