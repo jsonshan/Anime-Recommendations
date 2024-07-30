@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+.gradient-background{
+    padding-top: 32px;
+    padding-left: 64px;
+    padding-right: 64px;
+    background: linear-gradient(to bottom, #000, #213843);
+    height: 575px;
+    display: flex;
+    justify-content: center;
+}
+/* .container{
+    margin: 0 5%;
+} */
+.footer-sections{
+    /* width: 282px; */
+    flex: 1;
+    height: 380px;
+    padding: 0 .9375rem;
+}
+.footer-sections > * > *{
+    font-family: 'Lato';
+    font-weight: lighter;
+    font-size: 13px;
+    margin-bottom: 10px;
+    display: block;
+    flex-direction: column;
+    color: #A0A0A0;
+
+}
+.footer-sections > * > *:hover{
+    text-decoration: underline;
+    flex-direction: column;
+    color: white;
+}
+.footer-sections > * > *::selection{
+    background: #23252b;
+    color: #f47521;
+}
+
+h4 {
+    font-family: 'Lato';
+    color: white;
+    font-size: 14px;
+    margin-bottom: 12px;
+    padding-right: 20px;
+}
+h4::selection{
+    background: #23252b;
+    color: #f47521;
+}
+
+
+.first-child{
+    margin-left: 12.5%;
+}
+.last-child{
+    margin-right: 12.5%;
+}

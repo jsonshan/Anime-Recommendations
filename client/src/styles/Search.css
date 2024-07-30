@@ -1,19 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
 .container{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100px;
-    /* background-color: red; */
+    width: 100%;
+    background-color: #141519;
 }
 .search-bar{
-    /* color: white; */
+    position: relative;
+    color: white;
+    font-family: 'Lato';
     background-color: transparent;
-    /* border:none; */
+    /* background-color: red; */
+    padding: 0 2px;
+    
+    border:none;
     align-content: center;
-    width: 75%;
+    min-width: 23em;
+    /* height: 44px; */
+    font-size: 2em;
 }
+.search-container{
+    position: relative;
+    display: flex;
+    /* background-color: #141519; */
+    /* padding: 32px 0; */
+    justify-content: center;
+    /* width: 100%; */
+    /* height: 110px; */
+    margin: 0 30px;
+    --after-background-color: #59595B; /* Initial color set to black */
 
+
+}
+.search-container::after {
+    /* z-index: 99; */
+    content: ""; /* Necessary to generate a pseudo-element */
+    position: absolute; /* Position relative to .border-container */
+    bottom: -5px; /* Align the pseudo-element at the bottom */
+    left: 0; /* Start from the left edge */
+    width: 100%; /* Full width of the container */
+    height: 2px; /* Thickness of the border */
+    /* background-color: #59595B;  */
+    background-color: var(--after-background-color);
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+
+}
+/* .search-bar:focus + button + .search-container::after {
+    background-color: #FF9000;
+} */
+.search-bar::selection{
+    background: #23252b;
+    color: #f47521;
+}
 
 .search-bar:focus{
     outline:none;
+}
+
+.results-tab{
+    height: 200px;
+    background-color: black;
+}
+
+.invert {
+    filter: invert(100%);
+}
+.cross {
+    height: 35px;
+}
+button{
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.show {
+    display: block;
+}
+.hide {
+    opacity: 0;
+    cursor: text;
+}
+.empty{
+    height: 75px;
+    background-color: black;
+}
+
+.empty-search-results{
+    padding: 2.5rem 1.25rem 3.75rem;
+    background-color: black;
+    font-family: "Lato";
+    color: #dadada;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    outline: .0625rem dashed #dadada;
+    outline-offset: -.0625rem;
+    width: 65rem;
+    /* justify-content: center; */
+}
+.empty-search-results > p{
+    /* font-size: 15px; */
+    font-size: 1rem;
+    width: 400px;
+    text-align: center;
+}
+.mascot{
+    width: 14.625rem;
+    margin-bottom: 1.25rem;
+}
+.content-wrapper {
+    /* max-width: 1050px; */
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    padding-top: 2.5rem;
+    padding-bottom: 60px;
+}
+
+
+.result-content-wrapper {
+    background-color: black;
+    color: white;
+    /* padding-top: 32px; */
+    margin: 0 13.5%;
+    padding-left: 64px;
+    padding-right: 64px;
+    padding-top: 40px;
+}
+
+.result-content-wrapper > h4 {
+    font-size: 21px;
+    font-family: "Lato";
+    font-weight: 550;
+}
+.black-wrapper{
+    background-color: black;
+    width: 100%;
+    /* height: 250px; */
+}
+
+.anime-container{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 22px;
+    /* margin-bottom: 10px; */
+
+}
+.anime-container > img {
+    /* padding: 20px;  */
+    height: 255px;
+    width: 180px;
+    margin-bottom: 20px;
 }
