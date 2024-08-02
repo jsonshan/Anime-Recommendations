@@ -10,7 +10,7 @@ function Search() {
 
   const [animes, setAnimes] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
-
+  const [data, setData] = useState(null);
   // parse csv file
   useEffect(() => {
     const csvFilePath = "/anime_data.csv";
@@ -159,6 +159,27 @@ const findShowByTitle = (title) => {
             </button>
           </div>
         </div>
+
+        <div>
+          <h1>Data from Flask:</h1>
+          {data ? (
+            <div>
+              <p>{data.message}</p>
+              <ul>
+                {data.items.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <p>Loading...</p>
+          )}
+        </div>
+
+
+
+
+
         {likedList.length > 0 
                       ?
                         (
