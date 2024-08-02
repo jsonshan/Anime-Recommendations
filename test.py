@@ -12,8 +12,6 @@ print(f"Status code: {response.status_code}")
 if response.status_code == 200:
     response_json = response.json()
     print("Response content:")
-    print(f"Titles: {response_json.get('titles')}")
-    print(f"Scores: {response_json.get('scores')}")
-    print(f"Images: {response_json.get('images')}")
+    print(f"Codes: {response_json.get('codes')}")
 else:
     print(f"Error: {response.text}")

@@ -20,23 +20,23 @@ def get_average_similarity_scores(titles, cosine_sim, anime_data):
     mean_sim_scores = np.mean(cosine_sim[indices], axis=0)
     return mean_sim_scores
 
-def recommend_anime(titles, cosine_sim, anime_data, num_recommendations):
-    mean_sim_scores = get_average_similarity_scores(titles, cosine_sim, anime_data)
-    if mean_sim_scores is None:
-        return [], [], [], []
+def recommend_anime(titles, cosine_sim, anime_data, num_recommendations=12):
+    try:
+        mean_sim_scores = get_average_similarity_scores(titles, cosine_sim, anime_data)
+        if mean_sim_scores is None:
+            return []
 
-    top_indices = mean_sim_scores.argsort()[-num_recommendations-len(titles):][::-1]
-    
-    filtered_indices = [i for i in top_indices if anime_data.iloc[i]['show_titles'] not in titles]
+        top_indices = mean_sim_scores.argsort()[-num_recommendations-len(titles):][::-1]
 
-    final_indices = filtered_indices[:num_recommendations]
+        # Filter out the indices that correspond to the input titles
+        filtered_indices = [i for i in top_indices if anime_data.iloc[i]['show_titles'] not in titles]
 
-    recommended_titles = anime_data.iloc[final_indices]['show_titles'].tolist()
-    recommended_scores = mean_sim_scores[final_indices].tolist()
-    recommended_images = anime_data.iloc[final_indices]['image_url'].tolist()
-    recommended_synopsis = anime_data.iloc[final_indices]['synopsis'].tolist()
+        final_indices = filtered_indices[:num_recommendations]
 
-    return recommended_titles, recommended_scores, recommended_images, recommended_synopsis
+        return final_indices
+    except Exception as e:
+        print(f"Error in recommend_anime: {e}")
+        return []
 
 
 # def get_image_url(recommended_indices):
