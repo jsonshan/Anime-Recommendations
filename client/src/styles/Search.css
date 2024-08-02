@@ -122,7 +122,7 @@ button{
 }
 
 
-.result-content-wrapper {
+.result-content-wrapper, .liked-list-container {
     background-color: black;
     color: white;
     /* padding-top: 32px; */
@@ -157,3 +157,11 @@ button{
     width: 180px;
     margin-bottom: 20px;
 }
+.liked-list-container{
+    background-color: black;
+}
+/* .liked-list-container > h4{
+    margin: 0;
+} */
+
+

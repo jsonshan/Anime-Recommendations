@@ -7,22 +7,101 @@
     width: 190px;
     font-weight: 525;
     height: 322px;
+
 }
+/* .hovered-card::selection{
+    background: #23252b;
+    color: #f47521;
+} */
+
 .item{
     height: 280px;
     width: 190px;
 }
 
+/* .card:hover{
+    
+} */
 
 .hovered-card{
+    position: relative;
     padding: 15px 10px 0 10px;
     font-size: 13px;
     background-color: #141519;
     height: 322px;
+    width: 190px;
+    text-overflow: ellipsis;
     /* transition: background-color .3s ease, transform .3s ease; */
 
 }
-
-.anime-title{
+/* .anime-title{
     padding-bottom: 10px;
+} */
+.anime-title {
+    font-size: 18px; /* Larger font size for the title */
+    /* font-weight: bold; Bold text for the title */
+    color: white; /* Dark text color */
+    margin-bottom: 10px; /* Space between title and content */
+    overflow: hidden; /* Hide overflowed text */
+    text-overflow: ellipsis; /* Add ellipsis to truncated text */
+    white-space: nowrap; /* Prevent wrapping */
 }
+
+.card-content p {
+
+    font-size: 14px; /* Standard font size for content */
+    color: #848485; /* Gray text color for readability */
+    margin: 5px 0; /* Space between paragraphs */
+}
+.white {
+    color: white !important;
+}
+
+.anime-description {
+    overflow: hidden; /* Hide overflowed text */
+    text-overflow: ellipsis; /* Add ellipsis to truncated text */
+    display: -webkit-box; /* Flexbox container for multiline clamp */
+    -webkit-line-clamp: 5; /* Limit to 3 lines */
+    -webkit-box-orient: vertical; /* Vertical orientation for flexbox */
+    line-height: 1.5; /* Adjust line height for readability */
+    /* max-height: 4.5em; Max height based on line-clamp */
+}
+
+.card-buttons{
+    position: absolute;
+    bottom: 10px;
+    justify-content: start;
+    align-items: end;
+}
+
+.alert-box{
+    color: #FAFAFA;
+    position: absolute; /* Absolute positioning for the chatbox */
+    top: -55px; /* Position the chatbox above the hovered element */
+    left: -32px;
+    width: 75px;
+    background-color: #4A4E58;
+    /* border: 1px solid #ccc; */
+    padding: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Higher z-index to ensure it appears above other elements */
+}
+.alert-box::after {
+    content: '';
+    position: absolute;
+    bottom: -8px; /* Position the wedge below the chatbox */
+    left: 30px; /* Center the wedge horizontally */
+    width: 0;
+    height: 0;
+    border-width: 10px 10px 0;
+    border-style: dashed;
+    border-color: #4A4E58 transparent transparent transparent;
+    /* margin-top: -2px; */
+    /* filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.1)); Add subtle shadow to the wedge */
+  }
+  .card-buttons > img{
+    cursor: pointer;
+  }
+
+
+  

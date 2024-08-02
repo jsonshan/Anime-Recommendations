@@ -1,16 +1,28 @@
 import React, { useState }from 'react'
 import "../styles/Card.css"
-function Card({title, rating, imgSource}) {
+import Plus from "../assets/plus.png"
+function Card({title, rating, imgSource, genre, description, onTitleSelect, liked}) {
     const [isHovered, setIsHovered] = useState(false);
-
+    const [isAddHovered, setIsAddHovered] = useState(false)
     const handleMouseEnter = () => {
-        setIsHovered(true);
+        setIsHovered(prevState => true);
     };
 
     const handleMouseLeave = () => {
-        setIsHovered(false);
+        setIsHovered(prevState => false);
     };
+
+    const likedListHandler = (title) => {
+        onTitleSelect(title)
+    }
+
+    const substringBeforeDelimiter = (str) => {
+        const delimiter = ';;';
+        const index = str.indexOf(delimiter);
+        return index !== -1 ? str.substring(0, index) : str;
+      }
     return (
+        // ["Jujutsu Kaisen"]
         <div 
         className="card"
         onMouseEnter={() => setIsHovered(true)}
@@ -20,15 +32,72 @@ function Card({title, rating, imgSource}) {
                 ?
                     (
                         <div className="hovered-card">
-                            <p className="anime-title">{title}</p>
-                            <p>{rating} / 5.0</p>
+                            <p className="anime-title">{substringBeforeDelimiter(title)}</p>
+                            <div className="card-content">
+                                <p className="white">{rating} / 5.0</p>
+                                <p> {genre}</p>
+                                <p className="anime-description"> {description}</p>
+                            </div>
+                            {liked
+                            ? 
+                            (                            
+                                <div className="card-buttons">
+                                
+                                    <img 
+                                    src={Plus}
+                                    onMouseEnter={() => setIsAddHovered(true)}
+                                    onMouseLeave={() => setIsAddHovered(false)}
+                                    onClick={() => likedListHandler(title)}
+                                    />
+                                    {isAddHovered
+                                        ?
+                                            (
+                                                <div className="alert-box">
+                                                    Add to List
+                                                </div>
+                                            )      
+                                        : 
+                                            (
+                                                <div>
+                                                    
+                                                </div>
+                                            )
+                                    }
+                                </div>)
+                            :
+                            (<></>)
+                            
+                            }
+                            {/* <div className="card-buttons">
+                                
+                                <img 
+                                src={Plus}
+                                onMouseEnter={() => setIsAddHovered(true)}
+                                onMouseLeave={() => setIsAddHovered(false)}
+                                onClick={() => likedListHandler(title)}
+                                />
+                                {isAddHovered
+                                    ?
+                                        (
+                                            <div className="alert-box">
+                                                Add to List
+                                            </div>
+                                        )      
+                                    : 
+                                        (
+                                            <div>
+                                                
+                                            </div>
+                                        )
+                                }
+                            </div> */}
                         </div>
                     )
                 :
                     (
                         <div>
                             <img className="item" src={imgSource}/>
-                            <p>{title}</p>
+                            <p>{substringBeforeDelimiter(title)}</p>
                         </div>
                     )
             }
