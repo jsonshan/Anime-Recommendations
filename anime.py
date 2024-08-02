@@ -7,7 +7,6 @@ anime_data = pd.read_csv('data/anime_data.csv')
 # Loading Cosine Similarity Matrix
 cosine_sim = np.load('cosine_sim.npy')
 
-
 def get_average_similarity_scores(titles, cosine_sim, anime_data):
     indices = []
     for title in titles:
@@ -22,10 +21,9 @@ def get_average_similarity_scores(titles, cosine_sim, anime_data):
     return mean_sim_scores
 
 def recommend_anime(titles, cosine_sim, anime_data, num_recommendations):
-
     mean_sim_scores = get_average_similarity_scores(titles, cosine_sim, anime_data)
     if mean_sim_scores is None:
-        return [], []
+        return [], [], [], []
 
     top_indices = mean_sim_scores.argsort()[-num_recommendations-len(titles):][::-1]
     
@@ -34,18 +32,23 @@ def recommend_anime(titles, cosine_sim, anime_data, num_recommendations):
     final_indices = filtered_indices[:num_recommendations]
 
     recommended_titles = anime_data.iloc[final_indices]['show_titles'].tolist()
-    return recommended_titles, top_indices
+    recommended_scores = mean_sim_scores[final_indices].tolist()
+    recommended_images = anime_data.iloc[final_indices]['image_url'].tolist()
+    recommended_synopsis = anime_data.iloc[final_indices]['synopsis'].tolist()
 
-def get_image_url(recommended_indices):
-    recommended_imgs = anime_data['image_url'].iloc[recommended_indices]
-    return recommended_imgs
+    return recommended_titles, recommended_scores, recommended_images, recommended_synopsis
+
+
+# def get_image_url(recommended_indices):
+#     recommended_imgs = anime_data['image_url'].iloc[recommended_indices]
+#     return recommended_imgs
 
 # Testing
-titles = ['Magi']
-num_recommendations = 6
-recommended_titles, recommended_indices = recommend_anime(titles, cosine_sim, anime_data, num_recommendations)
+# titles = ['Magi']
+# num_recommendations = 6
+# recommended_titles, recommended_indices = recommend_anime(titles, cosine_sim, anime_data, num_recommendations)
 
-for i in range(len(recommended_titles)):
-    print(recommended_titles[i])
+# for i in range(len(recommended_titles)):
+#     print(recommended_titles[i])
 
 # print(get_image_url(recommended_indices))
