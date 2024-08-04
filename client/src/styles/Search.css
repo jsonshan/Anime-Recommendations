@@ -1,12 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
 .container{
+    position: fixed;
     display: flex;
     justify-content: center;
+    margin-top: 55px;
     align-items: center;
     height: 100px;
     width: 100%;
     background-color: #141519;
+    z-index: 2;
 }
 .search-bar{
     position: relative;
@@ -164,4 +167,10 @@ button{
     margin: 0;
 } */
 
+.padding-adjust{
+    height: 150px;
+}
 
+.extra-padding{
+    padding-top: 20px;
+}

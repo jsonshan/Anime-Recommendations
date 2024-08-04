@@ -4,13 +4,21 @@ import "../styles/Search.css"
 import Card from './Card'
 import Cross from "../assets/cross.svg"
 import CrunchyMascot from "../assets/crunchyroll-mascot.png"
-
+import Test from "../components/Test"
 
 function Search() {
 
   const [animes, setAnimes] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
   const [data, setData] = useState(null);
+
+
+  const [recommendedCodes, setRecommendedCodes] = useState([]);
+
+  const handleCodesUpdate = (codes) => {
+    setRecommendedCodes(codes);
+  };
+
   // parse csv file
   useEffect(() => {
     const csvFilePath = "/anime_data.csv";
@@ -35,6 +43,13 @@ function Search() {
     setSearchResult(filteredShows);
   }
 
+  const searchRef = useRef(null);
+  const scrollToSection = (ref) => {
+    if (ref.current) { // Ensure ref.current is not null
+      ref.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
 
   const containerRef = useRef(null);
   const [inputText, setInputText] = useState("");
@@ -52,7 +67,7 @@ function Search() {
   };
 
 
-
+  
 
 
   // Check for Typing
@@ -62,6 +77,7 @@ function Search() {
   const handleTypingStopped = () => {
     setIsTypingStopped(true);
     searchShows(inputText);
+    scrollToSection(searchRef);
   };
   useEffect(() => {
     if (inputText) {
@@ -95,13 +111,15 @@ function Search() {
     const roundedResult = Math.round(result * 10) / 10;
     return roundedResult;
   }
-
+  
+  const favoriteRef = useRef(null);
 
   const [likedList, setLikedList] = useState([])
   const handleTitleFromChild = (title) => {
     if (likedList.includes(title)){
       return
     }
+    scrollToSection(favoriteRef);
     setLikedList(prev => [...prev, title]);
     // console.log(likedList);
   }
@@ -137,11 +155,24 @@ function Search() {
 //   return show || null;
 // };
 
-const findShowByTitle = (title) => {
-  // Finds the anime with the exact match for show_titles
-  return animes.find(anime => anime.show_titles === title);
-};
+  const findShowByTitle = (title) => {
+    // Finds the anime with the exact match for show_titles
+    return animes.find(anime => anime.show_titles === title);
+  };
+  function getStringBeforeDelimiter(input) {
+    // Find the index of ';;'
+    const delimiterIndex = input.indexOf(';;');
+  
+    // If the delimiter is found, return the substring before it
+    // Otherwise, return the entire input string
+    return delimiterIndex !== -1 ? input.substring(0, delimiterIndex) : input;
+  }
+  
+  useEffect(() => {
+    console.log(recommendedCodes)
+  }, [recommendedCodes])
 
+  // const [recommendedList, setRecommendedList] = useState([]);
   return (
     <>
         <div className="container">
@@ -159,8 +190,11 @@ const findShowByTitle = (title) => {
             </button>
           </div>
         </div>
+        <div className="padding-adjust">
 
-        <div>
+        </div>
+
+        {/* <div>
           <h1>Data from Flask:</h1>
           {data ? (
             <div>
@@ -174,41 +208,62 @@ const findShowByTitle = (title) => {
           ) : (
             <p>Loading...</p>
           )}
-        </div>
+        </div> */}
 
-
-
+        
+        {recommendedCodes.length > 0
+          ?
+          (
+            <div className="black-wrapper">
+              <div className="result-content-wrapper">
+                <h4>Recommended</h4>
+                <div className="anime-container">
+                  {
+                    recommendedCodes.map((title, index) => {
+                      const show = findShowByTitle(title);
+                      return <Card key={index} onTitleSelect={handleTitleFromChild} title={show.show_titles} imgSource={show.image_url} genre={show.genre} rating={adjustScore(show.score)} description={show.synopsis}/>
+                    })
+                  }
+                </div>
+              </div>
+            </div>
+          )
+          :
+          (
+            <></>
+          )
+        }
 
 
         {likedList.length > 0 
-                      ?
-                        (
-                          <div className="black-wrapper">
-                            <div className="result-content-wrapper">
-                              <h4>Favorited</h4>  
+          ?
+            (
+              <div ref={favoriteRef} className="black-wrapper">
+                <div className="result-content-wrapper">
+                  <h4>Favorited</h4><Test onCodesUpdate={handleCodesUpdate} likedList={likedList}/>
 
-                              <div className="anime-container">
-                                {
-                                  likedList.map((title, index) => {
-                                    const show = findShowByTitle(title);
-                                    return <Card key={index} onTitleSelect={handleTitleFromChild} title={show.show_titles} imgSource={show.image_url} genre={show.genre} rating={adjustScore(show.score)} description={show.synopsis}/>
-                                  })
-                                }
+                  <div className="anime-container">
+                    {
+                      likedList.map((title, index) => {
+                        const show = findShowByTitle(title);
+                        return <Card key={index} onTitleSelect={handleTitleFromChild} title={show.show_titles} imgSource={show.image_url} genre={show.genre} rating={adjustScore(show.score)} description={show.synopsis}/>
+                      })
+                    }
 
-                              </div>
-                            </div>
-                          </div>
-                        )
-                      :
-                        (<></>)
+                  </div>
+                </div>
+              </div>
+            )
+          :
+            (<></>)
         }
         {inputText && isTypingStopped != "" 
           ?
             (searchResult.length > 0
               ? 
-                <div className="black-wrapper">
+                <div ref={searchRef} className="black-wrapper scroll">
                   <div className="result-content-wrapper">
-                    <h4>Top Results</h4>
+                    <h4 className="extra-padding">Top Results</h4>
                     <div className="anime-container">
                       {/* <Card title="Demon Slayer: Kimetsu no Yaiba" rating="5.0" imgSource="https://m.media-amazon.com/images/I/81FqK8mQYiL._SL1500_.jpg"/>
                       <Card title="Jujutsu Kaisen" rating="4.7" imgSource="https://cdn.animenewsnetwork.com/hotlink/thumbnails/max700x700/cms/news.6/196392/jjk_visual.jpg"/> */}
@@ -228,7 +283,7 @@ const findShowByTitle = (title) => {
                 </div>
             )
           : 
-            <div className="empty"></div>
+            <div ref={searchRef} className="empty"></div>
         }
     </>
     
