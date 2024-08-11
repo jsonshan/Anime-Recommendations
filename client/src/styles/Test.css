@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+.test{
+    background-color: rgb(167, 167, 167);
+    width: fit-content;
+    border-radius: 2px;
+    font-family: "Lato";
+    margin: 10px 0;
+}
