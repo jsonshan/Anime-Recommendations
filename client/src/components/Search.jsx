@@ -6,7 +6,10 @@ import Cross from "../assets/cross.svg"
 import CrunchyMascot from "../assets/crunchyroll-mascot.png"
 import Test from "../components/Test"
 
+import { useNavigate, useLocation } from 'react-router-dom'
 function Search() {
+  const navigate = useNavigate();
+  const location= useLocation(); // Get the current route
 
   const [animes, setAnimes] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
@@ -50,11 +53,17 @@ function Search() {
     }
   };
 
+  const [shouldFocus, setShouldFocus] = useState(false);
 
   const containerRef = useRef(null);
   const [inputText, setInputText] = useState("");
   const [hasResult, setHasResult] = useState(false);
   const handleFocus = () => {
+    if (location.pathname !== '/search') {
+      navigate('/search'); // Redirect to the target path
+      setShouldFocus(true);
+      // inputRef.current.focus();
+    }
     console.log("Running");
     if (containerRef.current) {
       containerRef.current.style.setProperty('--after-background-color', '#F47521');
@@ -65,6 +74,12 @@ function Search() {
       containerRef.current.style.setProperty('--after-background-color', '#59595B'); // Change to black when blurred
     }
   };
+  useEffect(() => {
+    if (shouldFocus && inputRef.current) {
+      inputRef.current.focus();
+      setShouldFocus(false); // Reset state to prevent re-focusing on every render
+    }
+  }, [shouldFocus]);
 
 
   
@@ -171,15 +186,16 @@ function Search() {
   useEffect(() => {
     console.log(recommendedCodes)
   }, [recommendedCodes])
-
+  const inputRef = useRef(null)
   // const [recommendedList, setRecommendedList] = useState([]);
   return (
     <>
+        {/* <div className="padding-adjust"></div> */}
         <div className="container">
           <div className="search-container"
           ref={containerRef}
           >
-            <input className="search-bar" type="text" placeholder="Search..."
+            <input ref={inputRef} className="search-bar" type="text" placeholder="Search..."
             onFocus={handleFocus}
             onBlur={handleBlur}
             value={inputText}
@@ -189,10 +205,11 @@ function Search() {
               <img className="cross invert" src={Cross} onClick={() => setInputText('')}/>
             </button>
           </div>
-        </div>
-        <div className="padding-adjust">
 
         </div>
+        {/* <div className="padding-adjust">
+
+        </div> */}
 
         {/* <div>
           <h1>Data from Flask:</h1>
@@ -240,6 +257,7 @@ function Search() {
             (
               <div ref={favoriteRef} className="black-wrapper">
                 <div className="result-content-wrapper">
+                  <div className="padding-adjust"></div>
                   <h4>Favorited</h4><Test onCodesUpdate={handleCodesUpdate} likedList={likedList}/>
 
                   <div className="anime-container">
@@ -275,6 +293,7 @@ function Search() {
                 </div>
               :
                 <div className="content-wrapper">
+                  <div className="padding-adjust"></div>
                   <div className="empty-search-results">
                     <img className="mascot" src={CrunchyMascot}/>
                     <p>Sorry, no results were found. Check your spelling or try searching for something else.</p>
