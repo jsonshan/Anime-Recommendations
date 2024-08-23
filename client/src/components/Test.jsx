@@ -6,7 +6,7 @@ function AnimeRecommendation({ onCodesUpdate , likedList }) {
 
 
   const recommendAnime = async () => {
-    const recommendAnimeUrl = 'http://127.0.0.1:5000/recommend-anime';
+    const recommendAnimeUrl = 'https://anime-recommendations-ten.vercel.app/';
     const recommendAnimeData = {
       // titles: ['Darling in the FranXX', 'One Piece', 'Magi'],
       titles: likedList,
