@@ -10,7 +10,7 @@ function AnimeRecommendation({ onCodesUpdate , likedList }) {
     const recommendAnimeData = {
       // titles: ['Darling in the FranXX', 'One Piece', 'Magi'],
       titles: likedList,
-      num_recommendations: 10,
+      num_recommendations: 12,
     };
 
     try {
