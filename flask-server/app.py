@@ -14,7 +14,7 @@ def recommend():
         print(f"Received data: {data}")  # Debugging statement to print received data
         titles = data.get('titles')
         print(f"Extracted titles: {titles}")  # Debugging statement to print extracted titles
-        num_recommendations = data.get('num_recommendations', 10)
+        num_recommendations = data.get('num_recommendations', 12)
         print(f"Number of recommendations: {num_recommendations}")  # Debugging statement
 
         if not titles:
